@@ -8,10 +8,9 @@ function populateHeaders(sheet, row) {
               "Member 4", 
               "Member 5", 
               "Member 6", 
-              "Member 7",
               "Notes"]];
 
-  var headerRange = sheet.getRange(`D${row}:P${row}`);
+  var headerRange = sheet.getRange(`D${row}:M${row}`);
   headerRange.setValues(headers);
   headerRange.setBackground("#b3d9ff");
   headerRange.setBorder(true, true, true, true, true, true, "#000000", SpreadsheetApp.BorderStyle.SOLID_LIGHT);
@@ -69,14 +68,14 @@ function populateEventHeader(sheet, row, event) {
   
 function populateEvent(sheet, row, category, location, lead, members) {
   // Set category, location, and lead
-  sheet.getRange(row, 3).setValue(category);
-  sheet.getRange(row, 4).setValue(location);
-  sheet.getRange(row, 5).setValue(lead);
+  sheet.getRange(row, 4).setValue(category);
+  sheet.getRange(row, 5).setValue(location);
+  sheet.getRange(row, 6).setValue(lead);
 
   // Check if there are members to add
   if (members.length > 0) {
     // If members exist, set their values starting from the 4th column
-    var range = sheet.getRange(row, 6, 1, members.length);
+    var range = sheet.getRange(row, 7, 1, members.length);
     range.setValues([members]); // setValues requires a 2D array
   }
   // Optionally, clear any existing values if members are empty and you're updating a row
