@@ -1,55 +1,57 @@
-function populateHeaders(sheet, row) {
-    headers = [["Category", 
-               "Location", 
-               "Lead", 
-               "Member 1", 
-               "Member 2", 
-               "Member 3", 
-               "Member 4", 
-               "Member 5", 
-               "Member 6", 
-               "Member 7", 
-               "Member 8",
-               "Member 9",
-               "Member 10",
-               "Notes"]];
+function populateHeaders(sheet, col) {
+    var headers = [["Category"], 
+                   ["Location"], 
+                   ["Lead"], 
+                   ["Member 1"], 
+                   ["Member 2"], 
+                   ["Member 3"], 
+                   ["Member 4"], 
+                   ["Member 5"], 
+                   ["Member 6"], 
+                   ["Member 7"], 
+                   ["Member 8"],
+                   ["Member 9"],
+                   ["Member 10"],
+                   ["Notes"]];
+
+    var startRow = 1; // Assuming you want to start from the first row
+    var endRow = headers.length; // Calculate the last row based on the number of headers
+    var headerRange = sheet.getRange(startRow, col, endRow, 1); // Adjusted for a single column range
+    headerRange.setValues(headers); // Set the values in the vertical range
+    headerRange.setBackground("#b3d9ff"); // Set background color
+    headerRange.setBorder(true, true, true, true, true, true, "#000000", SpreadsheetApp.BorderStyle.SOLID_LIGHT); // Set borders
+    headerRange.setFontWeight("bold"); // Set font weight to bold
+}
   
-    var headerRange = sheet.getRange(`A${row}:N${row}`);
-    headerRange.setValues(headers);
-    headerRange.setBackground("#b3d9ff");
-    headerRange.setBorder(true, true, true, true, true, true, "#000000", SpreadsheetApp.BorderStyle.SOLID_LIGHT);
-    headerRange.setFontWeight("bold");
-  }
-  
-  function populateDateHeader(sheet, row, date) {
+function populateDateHeader(sheet, row, date) {
     var range = sheet.getRange(`A${row}:AT${row}`); // Define the range for styling and text
-  
+
     var dayName = getDayName(date);
-    
+
     // Set the background color of the range to gold
     range.setBackground("#FFD700"); // Gold color hex code
-    
+
     // Merge the cells across the specified range
     range.mergeAcross();
-  
+
     range.setNumberFormat("MM/dd/yyyy");
-    
+
     // Set the text for the merged cell
     range.setValue(dayName + " " + date);
-    
+
     // Center the text horizontally
     range.setHorizontalAlignment("center");
-    
+
     // Optional: Center the text vertically if desired
     range.setVerticalAlignment("middle");
-    
+
     range.setBorder(true, true, true, true, true, true, "#000000", SpreadsheetApp.BorderStyle.SOLID_LIGHT);
-  
+
     // Optional: Set the text to bold if required
     range.setFontWeight("bold");
-  }
+}
   
-  function populateEventHeader(sheet, row, event) {
+function populateEventHeader(sheet, row, event) {
     var range = sheet.getRange(`A${row}:AT${row}`); // Define the range for styling and text
     
     // Set the background color of the range to gold
@@ -68,9 +70,9 @@ function populateHeaders(sheet, row) {
   
     // Optional: Set the text to bold if required
     range.setFontWeight("bold");
-  }
+}
   
-  function populateEvent(sheet, row, category, location, lead, members) {
+function populateEvent(sheet, row, category, location, lead, members) {
     // Set category, location, and lead
     sheet.getRange(row, 1).setValue(category);
     sheet.getRange(row, 2).setValue(location);
@@ -78,14 +80,14 @@ function populateHeaders(sheet, row) {
   
     // Check if there are members to add
     if (members.length > 0) {
-      // If members exist, set their values starting from the 4th column
-      var range = sheet.getRange(row, 4, 1, members.length);
-      range.setValues([members]); // setValues requires a 2D array
+        // If members exist, set their values starting from the 4th column
+        var range = sheet.getRange(row, 4, 1, members.length);
+        range.setValues([members]); // setValues requires a 2D array
     }
     // Optionally, clear any existing values if members are empty and you're updating a row
     else {
-      // Assuming a maximum number of members to clear out old data. Adjust as necessary.
-      var maxMembers = 10; // Adjust based on the maximum expected number of members
-      sheet.getRange(row, 4, 1, maxMembers).clearContent();
+        // Assuming a maximum number of members to clear out old data. Adjust as necessary.
+        var maxMembers = 10; // Adjust based on the maximum expected number of members
+        sheet.getRange(row, 4, 1, maxMembers).clearContent();
     }
-  }
+}
