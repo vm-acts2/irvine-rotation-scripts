@@ -14,7 +14,7 @@ function populateHeaders(sheet, row) {
                 "Member 10",
                 "Notes"]];
   
-    var headerRange = sheet.getRange(`C${row}:O${row}`);
+    var headerRange = sheet.getRange(`D${row}:P${row}`);
     headerRange.setValues(headers);
     headerRange.setBackground("#b3d9ff");
     headerRange.setBorder(true, true, true, true, true, true, "#000000", SpreadsheetApp.BorderStyle.SOLID_LIGHT);
@@ -22,7 +22,7 @@ function populateHeaders(sheet, row) {
   }
   
   function populateDateHeader(sheet, row, date) {
-    var range = sheet.getRange(`C${row}:AT${row}`); // Define the range for styling and text
+    var range = sheet.getRange(`D${row}:AT${row}`); // Define the range for styling and text
   
     var dayName = getDayName(date);
     
@@ -50,7 +50,7 @@ function populateHeaders(sheet, row) {
   }
   
   function populateEventHeader(sheet, row, event) {
-    var range = sheet.getRange(`C${row}:AT${row}`); // Define the range for styling and text
+    var range = sheet.getRange(`D${row}:AT${row}`); // Define the range for styling and text
     
     // Set the background color of the range to gold
     range.setBackground("#A4C2F4"); // Kinda blue color hex code
