@@ -85,3 +85,14 @@ function populateEvent(sheet, row, category, location, lead, members) {
     sheet.getRange(row, 6, 1, maxMembers).clearContent();
   }
 }
+
+function populateStaff(sheet, column, staffList) {
+  startRow = 2
+
+  // Convert the array of strings to a 2D array suitable for setValues method
+  var staffListTransposed = staffList.map(function(staffName) { return [staffName]; });
+
+  // Get the range to populate, starting from startRow, column, for the length of the strings array, 1 column wide
+  var range = sheet.getRange(startRow, column, staffListTransposed.length, 1);
+  range.setValues(staffListTransposed); // Populate the column with the strings
+}
